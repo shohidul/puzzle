@@ -171,7 +171,7 @@
                <div class="puzzle" id="puzzle8"></div>
            </div>
            <div class="puzzle-container droppable" id="container9" >
-               <!--<div class="puzzle" id="puzzle9"></div>-->
+               <div class="puzzle" id="puzzle9"></div>
            </div>
            <div class="puzzle-win-text">
                Unsolved Puzzle!!!
@@ -195,18 +195,12 @@
        $("body").on("mouseover", ".puzzle-container", function() {
            makeSortable();
        });
-       function makeSortable(){
-           $(".puzzle-container").sortable({
-          connectWith: "body .droppable",
-          placeholder: "drop-hover",
-          revert: 200,
-          stop: function( event, ui ) {
-              //timer();
-              $(".puzzle-container").each(function(){
+       function changeDroppableClass(){
+           $(".puzzle-container").each(function(){
                   $(this).removeClass("droppable");
                   if ( $(this).children().length==0) {
                          $(this).addClass("droppable");
-                      //console.log($(this).attr("id"));
+                      
                       if($(this).attr("id")=="container1"){
                           $(".puzzle-container").removeClass("disabled");
                           $(".puzzle-container").sortable( "enable" );
@@ -248,9 +242,21 @@
                       
                     }
               })
+       }
+       
+       var puzzle9;
+       
+       function makeSortable(){
+           $(".puzzle-container").sortable({
+          connectWith: "body .droppable",
+          placeholder: "drop-hover",
+          revert: 200,
+          stop: function( event, ui ) {
+              //timer();
+              changeDroppableClass();
               if ( $("#container9").children().length==0) {
                   if($("#container1 > .puzzle").is("#puzzle1") && $("#container2 > .puzzle").is("#puzzle2") && $("#container3 > .puzzle").is("#puzzle3") && $("#container4 > .puzzle").is("#puzzle4") && $("#container5 > .puzzle").is("#puzzle5") && $("#container6 > .puzzle").is("#puzzle6") && $("#container7 > .puzzle").is("#puzzle7") && $("#container8 > .puzzle").is("#puzzle8")){
-                        $("#container9").html('<div class="puzzle" id="puzzle9"></div>');
+                        $("#container9").html(puzzle9);
                       $(".puzzle-container").addClass("disabled");
                       $(".puzzle-container").sortable( "disable" );
                       $(".puzzle-container .puzzle").addClass("finished");
@@ -297,7 +303,11 @@
            document.getElementById("browsedImage").value = "";
        });
        
+       
        function shuffleThePuzzle(){
+            puzzle9 = $("#container9").html();
+            $("#container9").html("");
+           
            function shuffle(array) {
                 var j, x, i;
                 for (i = array.length - 1; i > 0; i--) {
@@ -357,6 +367,16 @@
            $(".puzzle-hint").siblings().show();
            $(".puzzle-hint").hide();
        }
+   </script>
+   <script>
+    $("body").on("click", ".puzzle", function(){
+        if($(this).parent().hasClass("disabled") == false){
+            
+           $(this).appendTo(".droppable");
+             changeDroppableClass();
+        }
+        
+    }) 
    </script>
 </body>
 </html>
