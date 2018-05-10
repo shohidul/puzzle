@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="images/favicon.png" type="image/gif" sizes="16x16">
     <title>Puzzle</title>
     <link rel="stylesheet" href="css/jquery-ui.min.css">
     <style>
@@ -43,6 +44,7 @@
             width: 300px;
             height: 300px;
             margin: 3px auto;
+            display: none;
             background-image:url(./images/lion_300.jpg);
         }
         #main-puzzle-container{
@@ -191,7 +193,7 @@
    
    <script>
        $("#container1, #container2, #container3, #container4, #container5, #container7").addClass("disabled");
-       $(".puzzle-hint").hide();
+       //$(".puzzle-hint").hide();
        $("body").on("mouseover", ".puzzle-container", function() {
            makeSortable();
        });
@@ -329,7 +331,7 @@
            puzzles.push($("#container7").html());
            puzzles.push($("#container8").html());
            
-           shuffle(puzzles);
+           //shuffle(puzzles);
            
            for(var i=0; i < puzzles.length; i++){
                $("#container"+(i+1)).html(puzzles[i]);
