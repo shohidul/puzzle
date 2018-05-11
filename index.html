@@ -18,13 +18,17 @@
             width: -moz-fit-content;
             width: fit-content;
             margin: 0 auto 50px auto;
+            padding: 30px;
         }
         
         .stopwatch-container{
+            padding: 30px;
+        }
+        .stopwatch{
             width: -webkit-fit-content;
             width: -moz-fit-content;
             width: fit-content;
-            margin: 0 auto 50px auto;
+            margin: 0 auto 10px auto;
         }
         
         .puzzle-list{
@@ -57,10 +61,11 @@
             background-image:url(./images/lion_300.jpg);
         }
         #main-puzzle-container{
-            width: 317px;
-            min-width: 317px;
-            height: 320px;
-            margin: auto;
+            width: 316px;
+            min-width: 316px;
+            height: 316px;
+            position: relative;
+            margin: 30px auto 0 auto;
             padding: 4px;
             box-sizing: border-box;
             background-color: aliceblue;
@@ -71,6 +76,51 @@
             height: 100px;
             display: inline-block;
             background-color: #333;
+        }
+        #container1{
+            position: absolute;
+            left: 4px;
+            top: 4px;
+        }
+        #container2{
+            position: absolute;
+            left: 108px;
+            top: 4px;
+        }
+        #container3{
+            position: absolute;
+            left: 212px;
+            top: 4px;
+        }
+        #container4{
+            position: absolute;
+            left: 4px;
+            top: 108px;
+        }
+        #container5{
+            position: absolute;
+            left: 108px;
+            top: 108px;
+        }
+        #container6{
+            position: absolute;
+            left: 212px;
+            top: 108px;
+        }
+        #container7{
+            position: absolute;
+            left: 4px;
+            top: 212px;
+        }
+        #container8{
+            position: absolute;
+            left: 108px;
+            top: 212px;
+        }
+        #container9{
+            position: absolute;
+            left: 212px;
+            top: 212px;
         }
         .puzzle{
             width: inherit;
@@ -127,8 +177,8 @@
         }
         .puzzle-win-text{
             text-align: center;
-            margin-top: 15px;
-            margin-bottom: 15px;
+            margin-top: 25px;
+            margin-bottom: 25px;
             font-size: 25px;
         }
         .black-btn{
@@ -143,7 +193,11 @@
             color: red;
         }
         .time{
-            font-size: 3.8em;
+            font-size: 3.75em;
+            margin-left: 1px;
+        }
+        .red{
+            color: red;
         }
         ul li img{
             display: none;
@@ -153,6 +207,29 @@
             width: 100%;
             margin-bottom: 20px;
         }
+        .a-card{
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            border: none;
+        }
+        .margin-bottom-15{
+            margin-bottom: 15px;
+        }
+        .count-text{
+            width: 100%;
+            text-align: center;
+            font-size: 38px;
+            font-weight: bold;
+        }
+        .count{
+            text-align: center;
+            font-size: 180px;
+            font-weight: 100;
+            display: block;
+            line-height: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -161,8 +238,8 @@
           <h2 class="title-text">A Puzzle Game</h2>
       </div>
       <div class="row">
-          <div class="col-md-4 col-sm-12">
-              <div class="list-container">
+          <div class="col-md-4 col-sm-12 margin-bottom-15">
+              <div class="list-container a-card">
                   <h4 style="margin-top: 0;">Select puzzle image</h4>
                    <ul class="puzzle-list">
                        <li id="lion" class="list selected">
@@ -179,7 +256,7 @@
                    <input type="file" accept="image/*" onchange="loadFile(event)" id="browsedImage">
                </div>
           </div>
-          <div class="col-md-4 col-sm-12">
+          <div class="col-md-4 col-sm-12 a-card margin-bottom-15">
               <div id="main-puzzle-container">
                   <div class="puzzle-hint"></div>
                    <div class="puzzle-container" id="container1">
@@ -212,12 +289,18 @@
                </div>
                <div class="puzzle-win-text">Unsolved Puzzle!!!</div>
           </div>
-          <div class="col-md-4 col-sm-12">
-              <div class="stopwatch-container">
-                <h1 class="time"><time>00:00:00</time></h1>
-                <button id="start" class="black-btn">Start</button>
-                <button id="stop" class="black-btn">Stop</button>
-                <button id="clear" class="black-btn">Clear</button>
+          <div class="col-md-4 col-sm-12 margin-bottom-15">
+              <div class="stopwatch-container a-card">
+                   <div class="stopwatch">
+                        <h1 class="time"><time>00:00:00</time></h1>
+                        <button id="start" class="black-btn">Start</button>
+                        <button id="stop" class="black-btn">Stop</button>
+                        <button id="clear" class="black-btn">Clear</button>
+                   </div>
+                   <div class="moves-count">
+                        <label class="count-text">Moves Count</label>
+                        <span class="count">00</span>
+                   </div>
                </div>
           </div> 
       </div>
@@ -234,11 +317,23 @@
        $("body").on("mouseover", ".puzzle-container", function() {
            makeSortable();
        });
+       
+       var movesCounter = 0;
        function changeDroppableClass(){
            $(".puzzle-container").each(function(){
                   $(this).removeClass("droppable");
                   if ( $(this).children().length==0) {
-                         $(this).addClass("droppable");
+                      
+                          $(this).addClass("droppable");
+                      if(movesCounter <= 9){ 
+                         $(".count").text("0"+movesCounter);
+                      }else{
+                          $(".count").text(movesCounter);
+                          if(movesCounter == 1000){
+                              $(".count").css("font-size", "150px");
+                          }
+                      }
+                          
                       
                       if($(this).attr("id")=="container1"){
                           $(".puzzle-container").removeClass("disabled");
@@ -286,8 +381,19 @@
        function isPuzzleSolved(){
            if ( $("#container9").children().length==0) {
                   if($("#container1 > .puzzle").is("#puzzle1") && $("#container2 > .puzzle").is("#puzzle2") && $("#container3 > .puzzle").is("#puzzle3") && $("#container4 > .puzzle").is("#puzzle4") && $("#container5 > .puzzle").is("#puzzle5") && $("#container6 > .puzzle").is("#puzzle6") && $("#container7 > .puzzle").is("#puzzle7") && $("#container8 > .puzzle").is("#puzzle8")){
-                        $("#container9").html(puzzle9);
+                      
+                      $("#container9").html(puzzle9);
                       $(".puzzle-container").addClass("disabled");
+                      if($(".time").text()!="00:00:00"){
+                           $(".time").addClass("red"); 
+                           clearTimeout(t);
+                           $("#stop").addClass("selected");
+                           $("#start").removeClass("selected");
+                      };
+                      $("#stop").attr("disabled", "true");
+                      $("#start").attr("disabled", true);
+                      $("#clear").attr("disabled", true);
+                      $(".count").addClass("red");
                       $(".puzzle-container").sortable( "disable" );
                       $(".puzzle-container .puzzle").addClass("finished");
                       $(".puzzle-win-text").text("Wow! You have solved it.");
@@ -303,6 +409,9 @@
           connectWith: "body .droppable",
           placeholder: "drop-hover",
           revert: 200,
+          update: function(event, ui) {
+              movesCounter = movesCounter+0.5;
+          },
           stop: function( event, ui ) {
               
               changeDroppableClass();
@@ -314,7 +423,7 @@
        
        $("body").on("click", ".puzzle", function(){
             if($(this).parent().hasClass("disabled") == false){
-
+               movesCounter++;
                $(this).appendTo(".droppable");
                changeDroppableClass();
                isPuzzleSolved();
@@ -349,7 +458,7 @@
            puzzles.push($("#container7").html());
            puzzles.push($("#container8").html());
            
-           shuffle(puzzles);
+           //shuffle(puzzles);
            
            for(var i=0; i < puzzles.length; i++){
                $("#container"+(i+1)).html(puzzles[i]);
@@ -368,10 +477,7 @@
            $(".puzzle-list li").removeClass("selected");
            $(this).addClass("selected");
            clearTime();
-           $("#start").removeClass("selected");
-            $("#stop").removeClass("selected");
-           $("#stop").attr("disabled", false);
-           $("#start").attr("disabled", false);
+           clearStopwach();
            document.getElementById("browsedImage").value = "";
        });
        
@@ -383,10 +489,7 @@
            shuffleThePuzzle();
            $(".puzzle-list li").removeClass("selected");
            clearTime();
-           $("#start").removeClass("selected");
-            $("#stop").removeClass("selected");
-           $("#stop").attr("disabled", false);
-           $("#start").attr("disabled", false);
+           clearStopwach();
       };
        
        $("#start").on("click", function(){
@@ -395,23 +498,29 @@
            $("#stop").removeClass("selected");
            $("#stop").attr("disabled", false);
        })
-        $("#stop").on("click", function(){
+       $("#stop").attr("disabled", "true");
+       $("#stop").on("click", function(){
            $(this).addClass("selected");
            $(this).attr("disabled", "disabled");
             $("#start").removeClass("selected");
            $("#start").attr("disabled", false);
        })
        $("#clear").on("click", function(){
-            $("#start").removeClass("selected");
-            $("#stop").removeClass("selected");
+            clearStopwach();
        })
+       function clearStopwach(){
+           $("#start").removeClass("selected");
+           $("#stop").removeClass("selected");
+           $("#stop").attr("disabled", "true");
+           $("#start").attr("disabled", false);
+       }
        function showHint(){
-           $(".puzzle-hint").show();
-           $(".puzzle-hint").siblings().hide();
+           $(".puzzle-hint").siblings().fadeOut();
+           $(".puzzle-hint").fadeIn();
        }
        function hideHint(){
-           $(".puzzle-hint").siblings().show();
-           $(".puzzle-hint").hide();
+           $(".puzzle-hint").fadeOut();
+           $(".puzzle-hint").siblings().fadeIn();
        }
    </script>
 </body>
