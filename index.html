@@ -2,21 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="images/favicon.png" type="image/gif" sizes="16x16">
     <title>Puzzle</title>
+    
     <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
     <style>
         .container{
-            display: flex;
-            justify-content: space-between;
-            margin: 50px;
+            margin-top: 30px;
         }
         .list-container{
-            width: 20%;
+            width: fit-content;
+            margin: 0 auto 50px auto;
         }
         
         .stopwatch-container{
-            width: 27%;
+            width: fit-content;
+            margin: 0 auto 50px auto;
         }
         
         .puzzle-list{
@@ -28,6 +32,7 @@
             height: 35px;
             line-height: 35px;
             background-color: #333;
+            font-size: 14px;
             margin-bottom: 5px;
             text-align: center;
             color: white;
@@ -48,10 +53,10 @@
             background-image:url(./images/lion_300.jpg);
         }
         #main-puzzle-container{
-            width: 316px;
-            min-width: 316px;
-            height: 316px;
-            //margin: auto;
+            width: 317px;
+            min-width: 317px;
+            height: 320px;
+            margin: auto;
             padding: 4px;
             box-sizing: border-box;
             background-color: aliceblue;
@@ -116,6 +121,7 @@
         .puzzle-win-text{
             text-align: center;
             margin-top: 15px;
+            margin-bottom: 15px;
             font-size: 25px;
         }
         .black-btn{
@@ -130,70 +136,94 @@
             color: red;
         }
         .time{
-            font-size: 4em;
+            font-size: 3.8em;
+        }
+        ul li img{
+            display: none;
+        }
+        .title-text{
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
   <div class="container">
-       <div class="list-container">
-          <h3 style="margin-top: 0;">Select puzzle image</h3>
-           <ul class="puzzle-list">
-               <li id="lion" class="selected">Lion</li>
-               <li id="cat">Cat</li>
-               <li id="hint" onmouseover="showHint()" onmouseout="hideHint()">Show Hint</li>
-           </ul>
-           <h3 style="margin-top: 0;">or browse from computer</h3>
-           <input type="file" accept="image/*" onchange="loadFile(event)" id="browsedImage">
-       </div>
-       <div id="main-puzzle-container">
-          <div class="puzzle-hint"></div>
-           <div class="puzzle-container" id="container1">
-               <div class="puzzle" id="puzzle1"></div>
-           </div>
-           <div class="puzzle-container" id="container2">
-               <div class="puzzle" id="puzzle2"></div>
-           </div>
-           <div class="puzzle-container" id="container3">
-               <div class="puzzle" id="puzzle3"></div>
-           </div>
-           <div class="puzzle-container" id="container4">
-               <div class="puzzle" id="puzzle4"></div>
-           </div>
-           <div class="puzzle-container" id="container5">
-               <div class="puzzle" id="puzzle5"></div>
-           </div>
-           <div class="puzzle-container" id="container6">
-               <div class="puzzle" id="puzzle6"></div>
-           </div>
-           <div class="puzzle-container" id="container7">
-               <div class="puzzle" id="puzzle7"></div>
-           </div>
-           <div class="puzzle-container" id="container8">
-               <div class="puzzle" id="puzzle8"></div>
-           </div>
-           <div class="puzzle-container droppable" id="container9" >
-               <div class="puzzle" id="puzzle9"></div>
-           </div>
-           <div class="puzzle-win-text">
-               Unsolved Puzzle!!!
-           </div>
-       </div>
-       <div class="stopwatch-container">
-            <h1 class="time"><time>00:00:00</time></h1>
-            <button id="start" class="black-btn">Start</button>
-            <button id="stop" class="black-btn">Stop</button>
-            <button id="clear" class="black-btn">Clear</button>
-       </div>
+      <div class="row">
+          <h2 class="title-text">A Puzzle Game</h2>
+      </div>
+      <div class="row">
+          <div class="col-md-4">
+              <div class="list-container">
+                  <h4 style="margin-top: 0;">Select puzzle image</h4>
+                   <ul class="puzzle-list">
+                       <li id="lion" class="list selected">
+                           Lion
+                           <img src="./images/lion_300.jpg" alt="">
+                       </li>
+                       <li id="cat" class="list">
+                           Cat
+                           <img src="./images/cat_300.jpeg" alt="">
+                       </li>
+                       <li id="hint" onmouseover="showHint()" onmouseout="hideHint()">Show Hint</li>
+                   </ul>
+                   <h4 style="margin-top: 0;">or browse from computer</h4>
+                   <input type="file" accept="image/*" onchange="loadFile(event)" id="browsedImage">
+               </div>
+          </div>
+          <div class="col-md-4">
+              <div id="main-puzzle-container">
+                  <div class="puzzle-hint"></div>
+                   <div class="puzzle-container" id="container1">
+                       <div class="puzzle" id="puzzle1"></div>
+                   </div>
+                   <div class="puzzle-container" id="container2">
+                       <div class="puzzle" id="puzzle2"></div>
+                   </div>
+                   <div class="puzzle-container" id="container3">
+                       <div class="puzzle" id="puzzle3"></div>
+                   </div>
+                   <div class="puzzle-container" id="container4">
+                       <div class="puzzle" id="puzzle4"></div>
+                   </div>
+                   <div class="puzzle-container" id="container5">
+                       <div class="puzzle" id="puzzle5"></div>
+                   </div>
+                   <div class="puzzle-container" id="container6">
+                       <div class="puzzle" id="puzzle6"></div>
+                   </div>
+                   <div class="puzzle-container" id="container7">
+                       <div class="puzzle" id="puzzle7"></div>
+                   </div>
+                   <div class="puzzle-container" id="container8">
+                       <div class="puzzle" id="puzzle8"></div>
+                   </div>
+                   <div class="puzzle-container droppable" id="container9" >
+                       <div class="puzzle" id="puzzle9"></div>
+                   </div>
+               </div>
+               <div class="puzzle-win-text">Unsolved Puzzle!!!</div>
+          </div>
+          <div class="col-md-4">
+              <div class="stopwatch-container">
+                <h1 class="time"><time>00:00:00</time></h1>
+                <button id="start" class="black-btn">Start</button>
+                <button id="stop" class="black-btn">Stop</button>
+                <button id="clear" class="black-btn">Clear</button>
+               </div>
+          </div> 
+      </div>
    </div>
-   <!--<button id="randomize">Randomize</button>-->
+   
    <script src="js/jquery-3.3.1.min.js"></script>
    <script src="js/jquery-ui.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
    <script src="js/stopwatch.js"></script>
    
    <script>
        $("#container1, #container2, #container3, #container4, #container5, #container7").addClass("disabled");
-       //$(".puzzle-hint").hide();
+       
        $("body").on("mouseover", ".puzzle-container", function() {
            makeSortable();
        });
@@ -246,6 +276,19 @@
               })
        }
        
+       function isPuzzleSolved(){
+           if ( $("#container9").children().length==0) {
+                  if($("#container1 > .puzzle").is("#puzzle1") && $("#container2 > .puzzle").is("#puzzle2") && $("#container3 > .puzzle").is("#puzzle3") && $("#container4 > .puzzle").is("#puzzle4") && $("#container5 > .puzzle").is("#puzzle5") && $("#container6 > .puzzle").is("#puzzle6") && $("#container7 > .puzzle").is("#puzzle7") && $("#container8 > .puzzle").is("#puzzle8")){
+                        $("#container9").html(puzzle9);
+                      $(".puzzle-container").addClass("disabled");
+                      $(".puzzle-container").sortable( "disable" );
+                      $(".puzzle-container .puzzle").addClass("finished");
+                      $(".puzzle-win-text").text("Wow! You have solved it.");
+                     }
+            }
+       }
+           
+       
        var puzzle9;
        
        function makeSortable(){
@@ -254,58 +297,26 @@
           placeholder: "drop-hover",
           revert: 200,
           stop: function( event, ui ) {
-              //timer();
+              
               changeDroppableClass();
-              if ( $("#container9").children().length==0) {
-                  if($("#container1 > .puzzle").is("#puzzle1") && $("#container2 > .puzzle").is("#puzzle2") && $("#container3 > .puzzle").is("#puzzle3") && $("#container4 > .puzzle").is("#puzzle4") && $("#container5 > .puzzle").is("#puzzle5") && $("#container6 > .puzzle").is("#puzzle6") && $("#container7 > .puzzle").is("#puzzle7") && $("#container8 > .puzzle").is("#puzzle8")){
-                        $("#container9").html(puzzle9);
-                      $(".puzzle-container").addClass("disabled");
-                      $(".puzzle-container").sortable( "disable" );
-                      $(".puzzle-container .puzzle").addClass("finished");
-                      $(".puzzle-win-text").text("Wow! You have solved it.");
-                     }
-                  }
+              isPuzzleSolved();
           }
         }).disableSelection();
        }
        makeSortable();
+       
+       $("body").on("click", ".puzzle", function(){
+            if($(this).parent().hasClass("disabled") == false){
+
+               $(this).appendTo(".droppable");
+               changeDroppableClass();
+               isPuzzleSolved();
+            }
+
+        }) 
+       
        $(".disabled").sortable( "disable" );
 
-       /*$("#randomize").on("click", function(){
-           shuffleThePuzzle();
-       })*/
-       var prototype = $("#main-puzzle-container").html()
-       $("#lion").on("click", function(){
-           $("#main-puzzle-container").html(prototype);
-           $(".puzzle").css("background-image", "url(./images/lion_300.jpg)");
-           $(".puzzle-hint").css("background-image", "url(./images/lion_300.jpg)");
-           shuffleThePuzzle();
-           $(".puzzle-list li").removeClass("selected");
-           $(this).addClass("selected");
-           clearTime();
-           $("#start").removeClass("selected");
-            $("#stop").removeClass("selected");
-           $("#stop").attr("disabled", false);
-           $("#start").attr("disabled", false);
-           document.getElementById("browsedImage").value = "";
-       });
-       
-       $("#cat").on("click", function(){
-           $("#main-puzzle-container").html(prototype);
-           $(".puzzle").css("background-image", "url(./images/cat_300.jpeg)");
-           $(".puzzle-hint").css("background-image", "url(./images/cat_300.jpeg)");
-           shuffleThePuzzle();
-           $(".puzzle-list li").removeClass("selected");
-           $(this).addClass("selected");
-           clearTime();
-           $("#start").removeClass("selected");
-            $("#stop").removeClass("selected");
-           $("#stop").attr("disabled", false);
-           $("#start").attr("disabled", false);
-           document.getElementById("browsedImage").value = "";
-       });
-       
-       
        function shuffleThePuzzle(){
             puzzle9 = $("#container9").html();
             $("#container9").html("");
@@ -331,7 +342,7 @@
            puzzles.push($("#container7").html());
            puzzles.push($("#container8").html());
            
-           //shuffle(puzzles);
+           shuffle(puzzles);
            
            for(var i=0; i < puzzles.length; i++){
                $("#container"+(i+1)).html(puzzles[i]);
@@ -339,10 +350,36 @@
        };
        shuffleThePuzzle();
 
+       
+       var prototype = $("#main-puzzle-container").html();
+       $(".list").on("click", function(){
+           $("#main-puzzle-container").html(prototype);
+           var puzzleImage = $(this).find("img").attr('src');
+           $(".puzzle").css("background-image", "url("+puzzleImage+")");
+           $(".puzzle-hint").css("background-image", "url("+puzzleImage+")");
+           shuffleThePuzzle();
+           $(".puzzle-list li").removeClass("selected");
+           $(this).addClass("selected");
+           clearTime();
+           $("#start").removeClass("selected");
+            $("#stop").removeClass("selected");
+           $("#stop").attr("disabled", false);
+           $("#start").attr("disabled", false);
+           document.getElementById("browsedImage").value = "";
+       });
+       
+       
        var loadFile = function(event) {
-          $(".puzzle").css("background-image", "url("+URL.createObjectURL(event.target.files[0])+")");
+           $("#main-puzzle-container").html(prototype);
+           $(".puzzle").css("background-image", "url("+URL.createObjectURL(event.target.files[0])+")");
            $(".puzzle-hint").css("background-image", "url("+URL.createObjectURL(event.target.files[0])+")");
-           //console.log(event.target.files[0]);
+           shuffleThePuzzle();
+           $(".puzzle-list li").removeClass("selected");
+           clearTime();
+           $("#start").removeClass("selected");
+            $("#stop").removeClass("selected");
+           $("#stop").attr("disabled", false);
+           $("#start").attr("disabled", false);
       };
        
        $("#start").on("click", function(){
@@ -369,16 +406,6 @@
            $(".puzzle-hint").siblings().show();
            $(".puzzle-hint").hide();
        }
-   </script>
-   <script>
-    $("body").on("click", ".puzzle", function(){
-        if($(this).parent().hasClass("disabled") == false){
-            
-           $(this).appendTo(".droppable");
-             changeDroppableClass();
-        }
-        
-    }) 
    </script>
 </body>
 </html>
