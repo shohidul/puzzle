@@ -292,7 +292,32 @@
         #start, #pause{
             cursor: pointer;
         }
+        .bg-black{
+            background-color: black !important;
+        }
+        .invert-color{
+           -webkit-filter: invert(1);
+           filter: invert(1);
+        }
 
+        .shake-that{
+          animation: shake 0.2s;
+          animation-iteration-count: 2;
+        }
+
+        @keyframes shake {
+          0% { transform: translate(1px, 1px) rotate(0deg); }
+          10% { transform: translate(-1px, -2px) rotate(-1deg); }
+          20% { transform: translate(-3px, 0px) rotate(1deg); }
+          30% { transform: translate(3px, 2px) rotate(0deg); }
+          40% { transform: translate(1px, -1px) rotate(1deg); }
+          50% { transform: translate(-1px, 2px) rotate(-1deg); }
+          60% { transform: translate(-3px, 1px) rotate(0deg); }
+          70% { transform: translate(3px, 1px) rotate(-1deg); }
+          80% { transform: translate(-1px, -1px) rotate(1deg); }
+          90% { transform: translate(1px, 2px) rotate(0deg); }
+          100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
     </style>
 </head>
 <body>
@@ -318,16 +343,18 @@
                            <img src="./images/chicks_300.jpg" alt="">Chicks
                        </li>
                         <li class="list">
-                           <img src="" alt="">Name
+                           <img src="" alt="">
                        </li>
                         <li class="list">
-                           <img src="" alt="">Name
+                           <img src="" alt="">
                        </li>
                         <li class="list">
                            <img src="./images/tiger_300.jpg" alt="">Tiger
                        </li>
                         <li class="list">
-                           <img src="./images/wolf_300.jpg" alt="">Wolf
+                           <img src="./images/wolf_300.jpg" alt="">
+                           <span>Wolf</span>
+                           <audio style="display:none;" preload="auto" src="./sounds/wolf6.mp3"></audio>
                        </li>
                         <li class="list">
                            <img src="./images/puppies_300.jpg" alt="">Puppies
@@ -336,7 +363,7 @@
                            <img src="./images/butterfly_300.jpg" alt="">Butterfly
                        </li>
                        <li class="list">
-                           <img src="" alt="">Name
+                           <img src="" alt="">
                        </li>
                        <li id="hint" onmouseover="showHint()" onmouseout="hideHint()">Show Hint</li>
                    </ul>
@@ -493,7 +520,7 @@
            
        
        var puzzle9;
-       
+       var prototype = $("#main-puzzle-container").html();
        function makeSortable(){
            $(".puzzle-container").sortable({
           connectWith: "body .droppable",
@@ -556,11 +583,13 @@
        };
        shuffleThePuzzle();
 
+       var sound;
        var executed = false;
-       var prototype = $("#main-puzzle-container").html();
+       
        $(".list").on("click", function(){
            $("#main-puzzle-container").html(prototype);
            var puzzleImage = $(this).find("img").attr('src');
+           sound = $(this).find("audio")[0];
            $(".puzzle").css("background-image", "url("+puzzleImage+")");
            $(".puzzle-hint").css("background-image", "url("+puzzleImage+")");
            shuffleThePuzzle();
@@ -641,13 +670,28 @@
            $("#pause").attr("disabled", "true");
            $("#start").attr("disabled", false);
        }
+       
        function showHint(){
            $(".puzzle-hint").siblings().fadeOut();
            $(".puzzle-hint").fadeIn();
+		   
+           $(".list").each(function(){ 
+               if($(this).hasClass("selected") && $(this).find("span").text()=="Wolf"){
+                   setTimeout(function(){ 
+                       sound.play();
+                       $("body, .list, .select-text, #hint").addClass("bg-black");
+                       $(".puzzle-hint").addClass("invert-color"); 
+                       $("body").addClass("shake-that"); 
+                   }, 1000);
+                  }
+           })
        }
        function hideHint(){
            $(".puzzle-hint").fadeOut();
            $(".puzzle-hint").siblings().fadeIn();
+           $("body, .list, .select-text, #hint").removeClass("bg-black");
+           $(".puzzle-hint").removeClass("invert-color");
+           $("body").removeClass("shake-that"); 
        }
        $('.browse-image-btn').bind("click" , function () {
         $('#browsedImage').click();
