@@ -64,4 +64,7 @@ function clearTime(){
     clearTimeout(t);
     playTime.textContent = "00:00:00";
     seconds = 0; minutes = 0; hours = 0;
+    clearTimeout(at);
+    actualTime = "00:00:00";
+    aseconds = 0; aminutes = 0; ahours = 0;
 }

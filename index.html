@@ -312,7 +312,10 @@
                            <img src="./images/cat_300.jpeg" alt="">Cat
                        </li>
                        <li class="list">
-                           <img src="" alt="">Name
+                           <img src="./images/owl_300.jpg" alt="">Owl
+                       </li>
+                        <li class="list">
+                           <img src="./images/chicks_300.jpg" alt="">Chicks
                        </li>
                         <li class="list">
                            <img src="" alt="">Name
@@ -321,19 +324,16 @@
                            <img src="" alt="">Name
                        </li>
                         <li class="list">
-                           <img src="" alt="">Name
+                           <img src="./images/tiger_300.jpg" alt="">Tiger
                        </li>
                         <li class="list">
-                           <img src="" alt="">Name
+                           <img src="./images/wolf_300.jpg" alt="">Wolf
                        </li>
                         <li class="list">
-                           <img src="" alt="">Name
+                           <img src="./images/puppies_300.jpg" alt="">Puppies
                        </li>
                         <li class="list">
-                           <img src="" alt="">Name
-                       </li>
-                        <li class="list">
-                           <img src="" alt="">Name
+                           <img src="./images/butterfly_300.jpg" alt="">Butterfly
                        </li>
                        <li class="list">
                            <img src="" alt="">Name
@@ -556,7 +556,7 @@
        };
        shuffleThePuzzle();
 
-       
+       var executed = false;
        var prototype = $("#main-puzzle-container").html();
        $(".list").on("click", function(){
            $("#main-puzzle-container").html(prototype);
@@ -568,6 +568,12 @@
            $(this).addClass("selected");
            clearTime();
            clearStopwach();
+           movesCounter = 0;
+           $(".count").removeClass("red"); 
+           $(".count").text("00"); 
+           $(".time").removeClass("red"); 
+           executed = false;
+           clearTime();
            document.getElementById("browsedImage").value = "";
        });
        
@@ -585,7 +591,6 @@
       };
        
        var gamePausedState = [];
-       var executed = false;
        $("#start").on("click", function(){ 
             
             var callOnce = (function() {
