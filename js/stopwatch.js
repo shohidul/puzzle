@@ -1,6 +1,7 @@
-var h1 = document.getElementsByTagName('h1')[0],
+var actualTime, aseconds = 0, aminutes = 0, ahours = 0, at;
+var playTime = document.getElementById('playTime'),
     start = document.getElementById('start'),
-    stop = document.getElementById('stop'),
+    pause = document.getElementById('pause'),
     clear = document.getElementById('clear'),
     seconds = 0, minutes = 0, hours = 0,
     t;
@@ -16,21 +17,41 @@ function add() {
         }
     }
     
-    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    playTime.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
 
     timer();
 }
+
 function timer() {
     t = setTimeout(add, 1000);
 }
-//timer();
+
+function addActualTime() {
+    aseconds++;
+    if (aseconds >= 60) {
+        aseconds = 0;
+        aminutes++;
+        if (aminutes >= 60) {
+            aminutes = 0;
+            ahours++;
+        }
+    }
+    
+    actualTime = (ahours ? (ahours > 9 ? ahours : "0" + ahours) : "00") + ":" + (aminutes ? (aminutes > 9 ? aminutes : "0" + aminutes) : "00") + ":" + (aseconds > 9 ? aseconds : "0" + aseconds);
+
+    actualTimer(); console.log(actualTime);
+}
+
+function actualTimer() {
+    at = setTimeout(addActualTime, 1000);
+}
 
 
 /* Start button */
 start.onclick = timer;
 
 /* Stop button */
-stop.onclick = function() {
+pause.onclick = function() {
     clearTimeout(t);
 }
 
@@ -41,6 +62,6 @@ clear.onclick = function() {
 
 function clearTime(){
     clearTimeout(t);
-    h1.textContent = "00:00:00";
+    playTime.textContent = "00:00:00";
     seconds = 0; minutes = 0; hours = 0;
 }
