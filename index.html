@@ -371,7 +371,7 @@
        }
    </script>
    <script>
-    $("body").on("click", ".puzzle", function(){
+    $("body").on("click, scroll", ".puzzle", function(){
         if($(this).parent().hasClass("disabled") == false){
             
            $(this).appendTo(".droppable");
