@@ -15,14 +15,13 @@
             margin-top: 30px;
         }
         .list-container{
-            width: -webkit-fit-content;
-            width: -moz-fit-content;
-            width: fit-content;
-            margin: 0 auto 50px auto;
+            min-width: 316px;
             padding: 30px;
             position: relative;
         }
-        
+        .text-center{
+            text-align: center !important;
+        }
         .stopwatch-container{
             padding: 30px;
         }
@@ -31,12 +30,16 @@
             width: -moz-fit-content;
             width: fit-content;
             margin: 0 auto 10px auto;
+            text-align: center;
         }
-        
+        .moves-count{
+            width: fit-content;
+            margin: 15px auto;
+        }
         .puzzle-list{
             list-style-type: none;
-            width: 285px;
-            height: 260px;
+/*            width: 285px;*/
+/*            height: 260px;*/
             padding: 0;
             columns: 2;
               -webkit-columns: 2;
@@ -44,12 +47,13 @@
         }
         .puzzle-list li{
             height: 35px;
-            width: 140px;
+            padding-left: 35px;
+/*            width: 140px;*/
             line-height: 35px;
             background-color: #fff;
             font-size: 14px;
             margin-bottom: 8px;
-            text-align: center;
+/*            text-align: center;*/
             cursor: pointer;
             position: relative;
             box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
@@ -82,7 +86,7 @@
             min-width: 316px;
             height: 316px;
             position: relative;
-            margin: 30px auto 0 auto;
+            margin: auto;
             padding: 4px;
             box-sizing: border-box;
             background-color: aliceblue;
@@ -231,6 +235,12 @@
         .margin-bottom-15{
             margin-bottom: 15px;
         }
+        .padding-trl-30{
+            padding: 30px 30px 0 30px;
+        }
+        .p0{
+            padding: 0;
+        }
         .count-text{
             width: 100%;
             text-align: center;
@@ -258,24 +268,32 @@
          display:none;
         }
         .browse-image-btn{
+            margin-top: 18px;
+/*
             position: absolute;
             right: 30px;
             bottom: 30px;
             width: 140px;
             cursor: pointer;
             font-size: 14px;
+*/
         }
         .browse-image-btn:hover{
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
+
         .my-image{
+            margin-top: 18px;
+/*
             position: absolute;
             left: 30px;
             bottom: 30px;
             width: 140px;
             cursor: pointer;
             font-size: 14px;
+*/
         }
+
         .my-image:hover{
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
@@ -326,7 +344,7 @@
           <h2 class="title-text">A Puzzle Game</h2>
       </div>
       <div class="row">
-          <div class="col-md-4 col-sm-12 margin-bottom-15">
+          <div class="col col-sm margin-bottom-15">
               <div class="list-container a-card">
                   <p class="select-text" style="font-weight: bold;">Select puzzle image</p>
                    <ul class="puzzle-list">
@@ -343,10 +361,13 @@
                            <img src="./images/chicks_300.jpg" alt="">Chicks
                        </li>
                         <li class="list">
-                           <img src="" alt="">
+                           <img src="./images/circle.png" alt="">
                        </li>
                         <li class="list">
-                           <img src="" alt="">
+                           <img src="./images/circle.png" alt="">
+                       </li>
+                       <li class="list my-image">
+                           <img src="./images/circle.png" alt="">My Image
                        </li>
                         <li class="list">
                            <img src="./images/tiger_300.jpg" alt="">Tiger
@@ -363,49 +384,64 @@
                            <img src="./images/butterfly_300.jpg" alt="">Butterfly
                        </li>
                        <li class="list">
-                           <img src="" alt="">
+                           <img src="./images/circle.png" alt="">
                        </li>
-                       <li id="hint" onmouseover="showHint()" onmouseout="hideHint()">Show Hint</li>
+                       <li class="text-center p0" id="hint" style="padding: 0;" onmouseover="showHint()" onmouseout="hideHint()">Show Hint</li>
+                       
+
+
+                       <li class="text-center p0 browse-image-btn" id="hint" style="padding: 0;">Browse</li>
+
                    </ul>
-                   <p class="select-text my-image list"><img src="" alt="">My Image</p>
-                   <p class="select-text browse-image-btn">Browse</p>
                    <input type="file" accept="image/*" onchange="loadFile(event)" id="browsedImage">
+
+<!--
+                   <div class="flex">
+                       <p class="select-text my-image list"><img src="./images/circle.png" alt="">My Image</p>
+                       <p class="select-text browse-image-btn">Browse</p>
+                       
+                   </div>
+-->
+
+
                </div>
           </div>
-          <div class="col-md-4 col-sm-12 a-card margin-bottom-15">
-              <div id="main-puzzle-container">
-                  <div class="puzzle-hint"></div>
-                   <div class="puzzle-container" id="container1">
-                       <div class="puzzle" id="puzzle1"></div>
+          <div class="col col-sm margin-bottom-15">
+             <div class="a-card padding-trl-30">
+                  <div id="main-puzzle-container">
+                      <div class="puzzle-hint"></div>
+                       <div class="puzzle-container" id="container1">
+                           <div class="puzzle" id="puzzle1"></div>
+                       </div>
+                       <div class="puzzle-container" id="container2">
+                           <div class="puzzle" id="puzzle2"></div>
+                       </div>
+                       <div class="puzzle-container" id="container3">
+                           <div class="puzzle" id="puzzle3"></div>
+                       </div>
+                       <div class="puzzle-container" id="container4">
+                           <div class="puzzle" id="puzzle4"></div>
+                       </div>
+                       <div class="puzzle-container" id="container5">
+                           <div class="puzzle" id="puzzle5"></div>
+                       </div>
+                       <div class="puzzle-container" id="container6">
+                           <div class="puzzle" id="puzzle6"></div>
+                       </div>
+                       <div class="puzzle-container" id="container7">
+                           <div class="puzzle" id="puzzle7"></div>
+                       </div>
+                       <div class="puzzle-container" id="container8">
+                           <div class="puzzle" id="puzzle8"></div>
+                       </div>
+                       <div class="puzzle-container droppable" id="container9" >
+                           <div class="puzzle" id="puzzle9"></div>
+                       </div>
                    </div>
-                   <div class="puzzle-container" id="container2">
-                       <div class="puzzle" id="puzzle2"></div>
-                   </div>
-                   <div class="puzzle-container" id="container3">
-                       <div class="puzzle" id="puzzle3"></div>
-                   </div>
-                   <div class="puzzle-container" id="container4">
-                       <div class="puzzle" id="puzzle4"></div>
-                   </div>
-                   <div class="puzzle-container" id="container5">
-                       <div class="puzzle" id="puzzle5"></div>
-                   </div>
-                   <div class="puzzle-container" id="container6">
-                       <div class="puzzle" id="puzzle6"></div>
-                   </div>
-                   <div class="puzzle-container" id="container7">
-                       <div class="puzzle" id="puzzle7"></div>
-                   </div>
-                   <div class="puzzle-container" id="container8">
-                       <div class="puzzle" id="puzzle8"></div>
-                   </div>
-                   <div class="puzzle-container droppable" id="container9" >
-                       <div class="puzzle" id="puzzle9"></div>
-                   </div>
-               </div>
                <div class="puzzle-win-text">Unsolved Puzzle!!!</div>
+             </div>
           </div>
-          <div class="col-md-4 col-sm-12 margin-bottom-15">
+          <div class="col col-sm margin-bottom-15">
               <div class="stopwatch-container a-card">
                    <div class="stopwatch">
                         <h1 class="time" id="playTime"><time>00:00:00</time></h1>
